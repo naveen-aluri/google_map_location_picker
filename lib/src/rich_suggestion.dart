@@ -6,7 +6,8 @@ class RichSuggestion extends StatelessWidget {
   final VoidCallback onTap;
   final AutoCompleteItem autoCompleteItem;
 
-  RichSuggestion(this.autoCompleteItem, this.onTap);
+  const RichSuggestion(this.autoCompleteItem, this.onTap, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +15,8 @@ class RichSuggestion extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-            margin: EdgeInsets.all(5),
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -33,12 +34,12 @@ class RichSuggestion extends StatelessWidget {
     final List<TextSpan> result = [];
 
     String startText =
-        autoCompleteItem.text.substring(0, autoCompleteItem.offset);
+        autoCompleteItem.text!.substring(0, autoCompleteItem.offset);
     if (startText.isNotEmpty) {
       result.add(
         TextSpan(
           text: startText,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.grey,
             fontSize: 15,
             fontWeight: FontWeight.w300,
@@ -47,13 +48,13 @@ class RichSuggestion extends StatelessWidget {
       );
     }
 
-    String boldText = autoCompleteItem.text.substring(autoCompleteItem.offset,
-        autoCompleteItem.offset + autoCompleteItem.length);
+    String boldText = autoCompleteItem.text!.substring(autoCompleteItem.offset!,
+        autoCompleteItem.offset! + autoCompleteItem.length!);
 
     result.add(
       TextSpan(
         text: boldText,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.grey,
           fontSize: 15,
           fontWeight: FontWeight.w500,
@@ -61,14 +62,12 @@ class RichSuggestion extends StatelessWidget {
       ),
     );
 
-    String remainingText = this
-        .autoCompleteItem
-        .text
-        .substring(autoCompleteItem.offset + autoCompleteItem.length);
+    String remainingText = autoCompleteItem.text!
+        .substring(autoCompleteItem.offset! + autoCompleteItem.length!);
     result.add(
       TextSpan(
         text: remainingText,
-        style: TextStyle(color: Colors.grey, fontSize: 15),
+        style: const TextStyle(color: Colors.grey, fontSize: 15),
       ),
     );
 

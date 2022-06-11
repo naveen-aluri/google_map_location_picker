@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PlaceholderWidget extends StatelessWidget {
-  const PlaceholderWidget(this.title, this.message);
+  const PlaceholderWidget(this.title, this.message, {Key? key})
+      : super(key: key);
 
   final String title;
   final String message;

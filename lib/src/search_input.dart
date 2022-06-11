@@ -5,18 +5,18 @@ import 'package:google_map_location_picker/generated/l10n.dart';
 
 /// Custom Search input field, showing the search and clear icons.
 class SearchInput extends StatefulWidget {
-  SearchInput(
+  const SearchInput(
     this.onSearchInput, {
-    Key key,
+    Key? key,
     this.searchInputKey,
     this.boxDecoration,
     this.hintText,
   }) : super(key: key);
 
   final ValueChanged<String> onSearchInput;
-  final Key searchInputKey;
-  final BoxDecoration boxDecoration;
-  final String hintText;
+  final Key? searchInputKey;
+  final BoxDecoration? boxDecoration;
+  final String? hintText;
 
   @override
   State<StatefulWidget> createState() => SearchInputState();
@@ -25,7 +25,7 @@ class SearchInput extends StatefulWidget {
 class SearchInputState extends State<SearchInput> {
   TextEditingController editController = TextEditingController();
 
-  Timer debouncer;
+  Timer? debouncer;
 
   bool hasSearchEntry = false;
 
@@ -51,10 +51,10 @@ class SearchInputState extends State<SearchInput> {
     }
 
     if (debouncer?.isActive ?? false) {
-      debouncer.cancel();
+      debouncer!.cancel();
     }
 
-    debouncer = Timer(Duration(milliseconds: 500), () {
+    debouncer = Timer(const Duration(milliseconds: 500), () {
       widget.onSearchInput(editController.text);
     });
   }
@@ -69,11 +69,11 @@ class SearchInputState extends State<SearchInput> {
                 ? Colors.black54
                 : Colors.white,
           ),
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
         children: <Widget>[
-          Icon(Icons.search),
-          SizedBox(width: 8),
+          const Icon(Icons.search),
+          const SizedBox(width: 8),
           Expanded(
             child: TextField(
               controller: editController,
@@ -90,10 +90,10 @@ class SearchInputState extends State<SearchInput> {
               },
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           hasSearchEntry
               ? GestureDetector(
-                  child: Icon(Icons.clear),
+                  child: const Icon(Icons.clear),
                   onTap: () {
                     editController.clear();
                     setState(() {
@@ -101,7 +101,7 @@ class SearchInputState extends State<SearchInput> {
                     });
                   },
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );
